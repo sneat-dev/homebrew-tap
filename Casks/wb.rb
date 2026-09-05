@@ -25,19 +25,13 @@ cask "wb" do
 
   name "wb"
   desc "wb — the Sneat workbench CLI: fleet-wide GitHub repo sync and config-driven recipes."
-  homepage "https://sneat.dev/workbench/"
+  homepage "https://sneat.work/bench"
 
   livecheck do
     skip "Auto-generated on release."
   end
 
   binary "wb"
-
-  postflight do
-    if system_command "/usr/bin/xattr", args: ["-h"], print_stderr: false
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/wb"]
-    end
-  end
 
   # No zap stanza required
 end
