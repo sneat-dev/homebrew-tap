@@ -1,0 +1,28 @@
+name: Cask syntax
+
+on:
+  pull_request:
+    paths:
+      - "Casks/**"
+      - ".github/workflows/cask-syntax.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Casks/**"
+      - ".github/workflows/cask-syntax.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ruby-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check every cask
+        shell: bash
+        run: |
+          for cask in Casks/*.rb; do
+            ruby -c "$cask"
+          done
